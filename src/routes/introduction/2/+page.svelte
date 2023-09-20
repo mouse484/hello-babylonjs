@@ -4,6 +4,7 @@
 	import Babylon from '$lib/Babylon.svelte';
 	import HemisphericLight from '$lib/HemisphericLight.svelte';
 	import Mesh from '$lib/Mesh.svelte';
+	import { Tools, Vector3 } from '@babylonjs/core';
 </script>
 
 <Babylon let:scene let:canvas>
@@ -16,9 +17,10 @@
 	<Audio {scene} path="/audio/OnandOn.mp3" options={{ loop: true, autoplay: true, volume: 0.1 }} />
 	<Mesh
 		type="CreateBox"
-		options={['box']}
-		exec={(mesh) => {
-			mesh.position.y = 0.5;
+		options={['box', { width: 2, height: 1.5, depth: 3 }]}
+		exec={(box) => {
+			box.position = new Vector3(-2, 4.2, 0.1);
+			box.rotation.y = Tools.ToRadians(45);
 		}}
 	/>
 	<Mesh type="CreateGround" options={['ground', { width: 10, height: 10 }]} />
