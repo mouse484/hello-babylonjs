@@ -1,0 +1,6 @@
+tasks:
+  - before: npm install -g bun
+    init: bun install
+    command: bun dev
+
+
