@@ -5,12 +5,13 @@
 	import { onMount } from 'svelte';
 
 	let canvas: HTMLCanvasElement;
+	let engine: Engine;
 	let scene: Scene;
 
 	let success = false;
 
 	onMount(() => {
-		const engine = new Engine(canvas, true);
+		engine = new Engine(canvas, true);
 		scene = new Scene(engine);
 
 		engine.runRenderLoop(() => {
@@ -20,6 +21,12 @@
 		success = true;
 	});
 </script>
+
+<svelte:window
+	on:resize={() => {
+		engine?.resize();
+	}}
+/>
 
 <canvas bind:this={canvas} />
 
